@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- En-tête du conseil -->
+    <div class="mb-12">
+        <div class="text-center mb-8">
+            <div class="flex items-center justify-center mb-4">
+                <span class="bg-green-fresh text-white px-4 py-2 text-sm font-bold mr-3">
+                    CONSEIL VENDEUR
+                </span>
+                <span class="bg-navy text-white px-4 py-2 text-sm font-bold">
+                    {{ conseil.category }}
+                </span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">
+                {{ conseil.title }}
+            </h1>
+            <div class="flex items-center justify-center space-x-6 text-gray-500">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span class="font-semibold">{{ conseil.author }}</span>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>{{ conseil.read_time }}</span>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>{{ conseil.created_at }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image principale -->
+        <div class="neo-brutalist overflow-hidden mb-8">
+            <img src="{{ conseil.image }}"
+                 alt="{{ conseil.title }}"
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+    </div>
+
+    <!-- Contenu du conseil -->
+    <div class="neo-brutalist bg-white p-8 md:p-12">
+        <div class="prose prose-lg max-w-none">
+            {{ conseil.content|safe }}
+        </div>
+    </div>
+
+    <!-- Section d'action -->
+    <div class="mt-12 p-8 neo-brutalist-green bg-green-bg">
+        <h3 class="text-xl font-black text-gray-900 mb-6 text-center">Prêt à appliquer ce conseil ?</h3>
+        <div class="flex justify-center space-x-4">
+            <a href="{% url 'register' %}" class="neo-brutalist-sm bg-green-fresh text-white px-8 py-4 btn-readable hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(74_222_128)] transition-all duration-200">
+                Devenir vendeur
+            </a>
+            <a href="{% url 'contact' %}" class="neo-brutalist-sm bg-navy text-white px-8 py-4 btn-readable hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(30_58_95)] transition-all duration-200">
+                Poser une question
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation vers d'autres conseils -->
+    <div class="mt-16">
+        <h3 class="text-2xl font-black text-gray-900 mb-8 text-center">Autres conseils utiles</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="neo-brutalist bg-white p-6">
+                <div class="flex items-center mb-3">
+                    <span class="bg-navy text-white px-3 py-1 text-xs font-bold mr-2">Rédaction</span>
+                </div>
+                <h4 class="text-lg font-black text-gray-900 mb-3">
+                    <a href="{% url 'conseil_detail' 2 %}" class="hover:text-navy">
+                        Rédiger des descriptions qui vendent
+                    </a>
+                </h4>
+                <p class="text-gray-600 mb-4">Une bonne description transforme un visiteur en acheteur...</p>
+                <a href="{% url 'conseil_detail' 2 %}" class="text-navy hover:text-navy-light font-bold btn-readable">
+                    Lire le conseil →
+                </a>
+            </div>
+            <div class="neo-brutalist bg-white p-6">
+                <div class="flex items-center mb-3">
+                    <span class="bg-navy text-white px-3 py-1 text-xs font-bold mr-2">Stratégie</span>
+                </div>
+                <h4 class="text-lg font-black text-gray-900 mb-3">
+                    <a href="{% url 'conseil_detail' 3 %}" class="hover:text-navy">
+                        Fixer le bon prix pour vos produits
+                    </a>
+                </h4>
+                <p class="text-gray-600 mb-4">Ni trop cher, ni trop bon marché. Découvrez comment analyser le marché...</p>
+                <a href="{% url 'conseil_detail' 3 %}" class="text-navy hover:text-navy-light font-bold btn-readable">
+                    Lire le conseil →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Retour aux conseils -->
+    <div class="mt-16 text-center">
+        <a href="{% url 'conseils' %}"
+           class="neo-brutalist-green-sm bg-green-fresh text-white px-8 py-4 btn-readable hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(74_222_128)] transition-all duration-200 inline-flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span>Voir tous les conseils</span>
+        </a>
+    </div>
+</div>
+
+<style>
+    .prose h2 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #1e3a5f;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    .prose p {
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+        color: #4b5563;
+        font-size: 1.1rem;
+    }
+    .prose ul {
+        margin-bottom: 1.5rem;
+    }
+    .prose li {
+        margin-bottom: 0.5rem;
+        color: #4b5563;
+    }
+</style>
+{% endblock %}

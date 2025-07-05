@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+        <ol class="flex items-center space-x-2 text-sm text-gray-500">
+            <li><a href="{% url 'product_list' %}" class="hover:text-navy">Produits</a></li>
+            <li><span class="mx-2">/</span></li>
+            <li><a href="{% url 'product_list' %}?category={{ product.category.slug }}" class="hover:text-navy">{{ product.category.name }}</a></li>
+            {% if product.subcategory %}
+                <li><span class="mx-2">/</span></li>
+                <li><a href="{% url 'product_list' %}?category={{ product.category.slug }}&subcategory={{ product.subcategory.slug }}" class="hover:text-navy">{{ product.subcategory.name }}</a></li>
+            {% endif %}
+            <li><span class="mx-2">/</span></li>
+            <li class="text-gray-900 font-medium">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="neo-brutalist bg-white">
+        <div class="grid md:grid-cols-2">
+            <div class="relative aspect-square">
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                    class="w-full h-full object-cover"
+                >
+                <!-- Badge catégorie -->
+                <div class="absolute top-6 left-6">
+                    <span class="bg-navy text-white px-4 py-2 font-bold">
+                        {{ product.category.name }}
+                        {% if product.subcategory %}
+                            > {{ product.subcategory.name }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="p-12">
+                <h1 class="text-3xl font-black text-gray-900 mb-4">{{ product.name }}</h1>
+                <p class="text-2xl font-black text-navy mb-8">{{ product.price }} €</p>
+
+                <!-- Description -->
+                <div class="prose max-w-none mb-12">
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Description</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">{{ product.description }}</p>
+                </div>
+
+                <!-- Informations du vendeur -->
+                <div class="mb-8 p-6 bg-green-bg rounded-lg neo-brutalist-green-sm">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Informations du vendeur</h3>
+                    <div class="space-y-2">
+                        <p class="text-gray-600">
+                            <span class="font-semibold">Vendeur:</span> {{ product.seller.username }}
+                        </p>
+                        <p class="text-gray-600">
+                            <span class="font-semibold">Email:</span>
+                            <a href="mailto:{{ product.seller.email }}" class="text-navy hover:text-navy-light">
+                                {{ product.seller.email }}
+                            </a>
+                        </p>
+                        {% if product.whatsapp %}
+                            <p class="text-gray-600">
+                                <span class="font-semibold">WhatsApp:</span> {{ product.whatsapp }}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Boutons de contact -->
+                <div class="space-y-4">
+                    {% if product.whatsapp %}
+                        <a href="https://wa.me/{{ product.whatsapp }}"
+                           class="neo-brutalist-green-sm bg-green-500 text-white w-full py-4 px-6 font-bold flex items-center justify-center gap-2 hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(34_197_94)] transition-all duration-200">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            <span>Contacter par WhatsApp</span>
+                        </a>
+                    {% endif %}
+                    <a href="mailto:{{ product.seller.email }}"
+                       class="neo-brutalist-sm bg-navy text-white w-full py-4 px-6 font-bold flex items-center justify-center gap-2 hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(30_58_95)] transition-all duration-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Contacter par Email</span>
+                    </a>
+                </div>
+
+                <!-- Informations supplémentaires -->
+                <div class="mt-12 pt-8 border-t-2 border-gray-100">
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Publié le {{ product.created_at|date:"d/m/Y à H:i" }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Produits similaires -->
+    {% if similar_products %}
+        <div class="mt-24">
+            <h2 class="text-3xl font-black text-gray-900 mb-12">Produits similaires</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for similar_product in similar_products %}
+                    <div class="neo-brutalist bg-white transform transition-all duration-200 hover:-translate-y-1 hover:translate-x-1 hover:shadow-[9px_9px_0px_rgb(30_58_95)]">
+                        <div class="relative">
+                            <img
+                                src="{{ similar_product.image.url }}"
+                                alt="{{ similar_product.name }}"
+                                class="w-full h-48 object-cover"
+                            >
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-black text-gray-900 mb-2">{{ similar_product.name }}</h3>
+                            <p class="text-xl font-black text-navy mb-4">{{ similar_product.price }} €</p>
+                            <a href="{% url 'product_detail' similar_product.pk %}"
+                               class="neo-brutalist-green-sm bg-green-fresh text-white px-4 py-2 font-bold hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[3px_3px_0px_rgb(74_222_128)] transition-all duration-200">
+                                Voir détails
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

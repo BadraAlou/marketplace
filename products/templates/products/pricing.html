@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+    <!-- En-tête -->
+    <div class="text-center mb-12 sm:mb-16 lg:mb-20">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 sm:mb-6">Nos Tarifs</h1>
+        <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
+            Choisissez le plan qui correspond à vos besoins.
+        </p>
+    </div>
+
+    <!-- Grille des packages -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+        <!-- Plan Small -->
+        <div class="relative">
+            <div class="neo-brutalist-green bg-white p-6 sm:p-8 h-full">
+                <div class="text-center mb-6 sm:mb-8">
+                    <h3 class="text-xl sm:text-2xl font-black text-gray-900 mb-4 sm:mb-6">Small</h3>
+                    <div class="mb-4 sm:mb-6">
+                        <span class="text-2xl sm:text-3xl lg:text-4xl font-black text-green-fresh">
+                            3 900F
+                        </span>
+                        <span class="text-gray-500 text-sm sm:text-base">/mois</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto">
+                    <a href="{% url 'register' %}"
+                       class="neo-brutalist-green-sm bg-green-fresh text-white w-full py-3 sm:py-4 px-4 sm:px-6 font-bold hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(74_222_128)] transition-all duration-200 text-center block text-sm sm:text-base">
+                        Choisir Small
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plan Medium -->
+        <div class="relative md:transform md:scale-105">
+            <div class="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
+                <span class="bg-purple-600 text-white px-4 sm:px-6 py-1 sm:py-2 font-bold text-xs sm:text-sm">
+                    ⭐ POPULAIRE
+                </span>
+            </div>
+
+            <div class="neo-brutalist bg-white p-6 sm:p-8 h-full">
+                <div class="text-center mb-6 sm:mb-8">
+                    <h3 class="text-xl sm:text-2xl font-black text-gray-900 mb-4 sm:mb-6">Medium</h3>
+                    <div class="mb-4 sm:mb-6">
+                        <span class="text-2xl sm:text-3xl lg:text-4xl font-black text-navy">
+                            5 000F
+                        </span>
+                        <span class="text-gray-500 text-sm sm:text-base">/mois</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto">
+                    <a href="{% url 'register' %}"
+                       class="neo-brutalist-sm bg-navy text-white w-full py-3 sm:py-4 px-4 sm:px-6 font-bold hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(30_58_95)] transition-all duration-200 text-center block text-sm sm:text-base">
+                        Choisir Medium
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plan Large -->
+        <div class="relative">
+            <div class="neo-brutalist-purple bg-white p-6 sm:p-8 h-full">
+                <div class="text-center mb-6 sm:mb-8">
+                    <h3 class="text-xl sm:text-2xl font-black text-gray-900 mb-4 sm:mb-6">Large</h3>
+                    <div class="mb-4 sm:mb-6">
+                        <span class="text-2xl sm:text-3xl lg:text-4xl font-black text-purple-600">
+                            10 000F
+                        </span>
+                        <span class="text-gray-500 text-sm sm:text-base">/mois</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto">
+                    <a href="{% url 'register' %}"
+                       class="neo-brutalist-purple-sm bg-purple-600 text-white w-full py-3 sm:py-4 px-4 sm:px-6 font-bold hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(147_51_234)] transition-all duration-200 text-center block text-sm sm:text-base">
+                        Choisir Large
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center mt-12 sm:mt-16 lg:mt-20">
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-4 sm:mb-6">Prêt à commencer ?</h2>
+        <a href="{% url 'register' %}"
+           class="neo-brutalist-green bg-green-fresh text-white px-6 sm:px-8 py-3 sm:py-4 font-bold hover:-translate-y-1 hover:translate-x-1 hover:shadow-[9px_9px_0px_rgb(74_222_128)] transition-all duration-200 inline-flex items-center text-sm sm:text-base">
+            <span>Créer mon compte</span>
+            <svg class="ml-2 w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+        </a>
+    </div>
+</div>
+{% endblock %}

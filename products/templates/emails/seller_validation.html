@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte vendeur validé</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-bottom: 20px;
+        }
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: #4ade80;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        .features {
+            background: #dcfce7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .features h3 {
+            color: #1e3a5f;
+            margin-top: 0;
+        }
+        .features ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .features li {
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #4ade80;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .highlight {
+            color: #4ade80;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">MonMarché</div>
+            <div class="success-icon">✓</div>
+            <h1 class="title">Félicitations {{ user.username }} !</h1>
+        </div>
+
+        <div class="content">
+            <p>Excellente nouvelle ! Votre compte vendeur sur <strong>{{ site_name }}</strong> a été validé par notre équipe.</p>
+
+            <div class="features">
+                <h3>Vous pouvez maintenant :</h3>
+                <ul>
+                    <li>✅ <strong>Ajouter vos produits</strong> avec photos et descriptions</li>
+                    <li>✅ <strong>Gérer votre catalogue</strong> depuis votre tableau de bord</li>
+                    <li>✅ <strong>Commencer à vendre</strong> et recevoir des contacts clients</li>
+                    <li>✅ <strong>Organiser vos produits</strong> par catégories et sous-catégories</li>
+                </ul>
+            </div>
+
+            <p>Votre parcours de vendeur commence maintenant ! Connectez-vous à votre tableau de bord pour publier votre premier article.</p>
+
+            <div style="text-align: center;">
+                <a href="#" class="cta-button">Accéder à mon tableau de bord</a>
+            </div>
+
+            <p><strong>Quelques conseils pour bien commencer :</strong></p>
+            <ul>
+                <li>Prenez des photos de qualité de vos produits</li>
+                <li>Rédigez des descriptions détaillées et attractives</li>
+                <li>Fixez des prix compétitifs</li>
+                <li>Répondez rapidement aux contacts clients</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>Merci de faire confiance à <span class="highlight">{{ site_name }}</span> !</p>
+            <p>L'équipe {{ site_name }}</p>
+            <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
+            <p style="font-size: 12px;">
+                Cet email a été envoyé automatiquement. Si vous avez des questions, contactez-nous à support@monmarche.fr
+            </p>
+        </div>
+    </div>
+</body>
+</html>

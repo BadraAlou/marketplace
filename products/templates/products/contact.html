@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <!-- En-tête -->
+    <div class="text-center mb-20">
+        <h1 class="text-5xl font-black text-gray-900 mb-6">Contactez-nous</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Une question, une suggestion ou besoin d'aide ? Notre équipe est là pour vous accompagner dans votre réussite.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <!-- Formulaire de contact -->
+        <div class="neo-brutalist bg-white p-8">
+            <h2 class="text-2xl font-black text-gray-900 mb-8">Envoyez-nous un message</h2>
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div>
+                        <label for="{{ field.id_for_label }}"
+                               class="block text-sm font-bold text-gray-700 mb-2">
+                            {{ field.label }}
+                            {% if field.field.required %}
+                                <span class="text-red-500">*</span>
+                            {% endif %}
+                        </label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <p class="text-red-600 text-sm mt-1">{{ field.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit"
+                        class="neo-brutalist-green-sm bg-green-fresh text-white w-full py-4 px-6 btn-readable hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(74_222_128)] transition-all duration-200">
+                    Envoyer le message
+                </button>
+            </form>
+        </div>
+
+        <!-- Informations de contact -->
+        <div class="space-y-8">
+            <!-- Coordonnées -->
+            <div class="neo-brutalist bg-white p-8">
+                <h3 class="text-xl font-black text-gray-900 mb-6">Nos coordonnées</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-navy mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <div>
+                            <p class="font-bold text-gray-900">Email</p>
+                            <a href="mailto:{{ contact_info.email }}" class="text-navy hover:text-navy-light">
+                                {{ contact_info.email }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-navy mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        <div>
+                            <p class="font-bold text-gray-900">Téléphone</p>
+                            <a href="tel:{{ contact_info.phone }}" class="text-navy hover:text-navy-light">
+                                {{ contact_info.phone }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-navy mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-bold text-gray-900">Adresse</p>
+                            <p class="text-gray-600">{{ contact_info.address }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 text-navy mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-bold text-gray-900">Horaires</p>
+                            <p class="text-gray-600">{{ contact_info.hours }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ rapide -->
+            <div class="neo-brutalist bg-white p-8">
+                <h3 class="text-xl font-black text-gray-900 mb-6">Questions fréquentes</h3>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-bold text-gray-900 mb-2">Comment devenir vendeur ?</h4>
+                        <p class="text-gray-600 text-sm">Créez un compte et cochez "Je souhaite devenir vendeur". Votre compte sera validé sous 24h.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 mb-2">Combien coûte la plateforme ?</h4>
+                        <p class="text-gray-600 text-sm">Nous proposons plusieurs plans adaptés à vos besoins. <a href="{% url 'pricing' %}" class="text-navy hover:text-navy-light">Voir nos tarifs</a>.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 mb-2">Comment contacter un vendeur ?</h4>
+                        <p class="text-gray-600 text-sm">Chaque produit affiche les coordonnées du vendeur (WhatsApp, email).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lien vers les conseils -->
+            <div class="neo-brutalist-green bg-green-bg p-8">
+                <h3 class="text-xl font-black text-gray-900 mb-6">Besoin de conseils ?</h3>
+                <p class="text-gray-600 mb-6">
+                    Consultez notre section conseils pour optimiser vos ventes et améliorer votre activité.
+                </p>
+                <a href="{% url 'conseils' %}"
+                   class="neo-brutalist-green-sm bg-green-fresh text-white px-6 py-3 btn-readable hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(74_222_128)] transition-all duration-200 inline-flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <span>Voir les conseils</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section d'aide supplémentaire -->
+    <div class="mt-20">
+        <div class="neo-brutalist bg-white p-12 text-center">
+            <h2 class="text-3xl font-black text-gray-900 mb-6">Besoin d'aide immédiate ?</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                Consultez nos conseils pratiques ou découvrez notre équipe pour mieux nous connaître.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'conseils' %}"
+                   class="neo-brutalist-sm bg-navy text-white px-8 py-4 btn-readable hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(30_58_95)] transition-all duration-200 inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <span>Consulter les conseils</span>
+                </a>
+                <a href="{% url 'about' %}"
+                   class="neo-brutalist-green-sm bg-green-fresh text-white px-8 py-4 btn-readable hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[5px_5px_0px_rgb(74_222_128)] transition-all duration-200 inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>En savoir plus</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
